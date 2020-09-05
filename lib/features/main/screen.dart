@@ -25,13 +25,19 @@ class MainScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            SegmentedSwitch(
-              fontSize: 13,
-              onChanged: _uiController.segmentedChanged,
-              tabs: [
-                Tab(text: 'OVERVIEW'),
-                Tab(text: 'DAY'),
-              ],
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+              ),
+              child: SegmentedSwitch(
+                fontSize: 13,
+                onChanged: _uiController.segmentedChanged,
+                tabs: [
+                  Tab(text: 'OVERVIEW'),
+                  Tab(text: 'DAY'),
+                ],
+              ),
             ),
             Divider(height: 0),
             Obx(
