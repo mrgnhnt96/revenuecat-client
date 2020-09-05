@@ -41,6 +41,7 @@ class CustomDialog extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(25, 30, 25, 5),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   const SizedBox(height: 25),
                   if (image != null) ...[
@@ -49,6 +50,7 @@ class CustomDialog extends StatelessWidget {
                   ],
                   Text(
                     title,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -61,7 +63,7 @@ class CustomDialog extends StatelessWidget {
                     text: message,
                     style: TextStyle(fontSize: 15, fontFamily: 'Roboto'),
                     textAlign: TextAlign.center,
-                    linkStyle: TextStyle(color: Colors.blue),
+                    linkStyle: TextStyle(color: Get.theme.accentColor),
                   ),
                   const SizedBox(height: 20),
                   if (child != null) ...[
@@ -77,7 +79,7 @@ class CustomDialog extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
-                          color: Colors.blue,
+                          color: Get.theme.accentColor,
                           fontFamily: 'Roboto',
                         ),
                       ),
@@ -95,11 +97,12 @@ class CustomDialog extends StatelessWidget {
           ),
           if (!permanent) ...[
             IconButton(
-                icon: const Icon(Icons.close, size: 18),
-                onPressed: () {
-                  Get.back();
-                  dismissed?.call();
-                })
+              icon: const Icon(Icons.close, size: 18),
+              onPressed: () {
+                Get.back();
+                dismissed?.call();
+              },
+            )
           ]
         ],
       ),

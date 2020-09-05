@@ -1,7 +1,8 @@
 import 'package:app/core/apis/general.api.dart';
 import 'package:app/core/controllers/base.controller.dart';
-import 'package:app/core/utils/logger.dart';
 import 'package:app/core/models/overview.model.dart';
+import 'package:app/core/utils/logger.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -12,9 +13,9 @@ class OverviewScreenController extends BaseController {
 
   // VARIABLES
   final _api = Get.find<GeneralAPI>();
+  final refreshController = EasyRefreshController();
 
   // PROPERTIES
-
   final overview = Overview().obs;
 
   // GETTERS
@@ -43,7 +44,13 @@ class OverviewScreenController extends BaseController {
   Future<void> fetch() async {
     this.busyState();
     overview.value = Overview();
-    overview.value = await _api.overview();
+    final result = await _api.overview();
     this.idleState();
+
+    result.fold(
+      (error) =>
+          errorState(text: 'API Error: ${error.code}!\n${error.message}'),
+      (data) => overview.value = data,
+    );
   }
 }
