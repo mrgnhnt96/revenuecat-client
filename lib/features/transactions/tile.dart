@@ -45,12 +45,11 @@ class TransactionsTile extends StatelessWidget {
           style: _subTitleStyle,
           overflow: TextOverflow.ellipsis,
         ),
-        if (object.expiresDate != null) ...[
+        if (object.expiresDate != null)
           Text(
-            'Expires: ${DateFormat.yMMMEd().add_jm().format(object.expiresDate)}',
+            'Expires: ${DateFormat.yMMMEd().format(object.expiresDate)}',
             style: _subTitleStyle,
           ),
-        ],
         SizedBox(height: 5),
         Wrap(
           children: [
