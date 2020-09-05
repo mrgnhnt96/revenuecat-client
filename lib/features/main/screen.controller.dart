@@ -78,7 +78,7 @@ class MainScreenController extends GetxController {
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (_, __, ___) => CustomDialog(
         'RevenueCat',
-        'An unonofficial client for RevenueCat. Not endorsed or affiliated at all.\n$version',
+        'An unofficial client for RevenueCat. Not endorsed or affiliated at all.\n$version',
         image: Image.asset('assets/images/revenuecat.png', height: 50),
         child: Column(
           children: [
