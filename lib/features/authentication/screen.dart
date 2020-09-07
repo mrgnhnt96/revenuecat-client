@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:app/assets/rv_icons.dart';
 import 'package:app/core/utils/constants.dart';
 import 'package:app/core/utils/logger.dart';
 import 'package:app/features/authentication/screen.controller.dart';
+import 'package:app/features/qr_code/screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -64,25 +69,37 @@ class AuthScreen extends StatelessWidget {
                 ],
               ),
               Divider(),
-              TextField(
-                controller: _uiController.editingController,
-                minLines: 2,
-                maxLines: 10,
-                textAlign: TextAlign.center,
-                enabled: !_uiController.busy,
-                style: const TextStyle(fontWeight: FontWeight.w700),
-                decoration: InputDecoration(hintText: 'Basic bLaBlaTokenHere'),
-                textInputAction: TextInputAction.send,
-                onSubmitted: (_) => _uiController.validate(),
-                onChanged: (text) =>
-                    _uiController.ready.value = text.isNotEmpty,
+              Flexible(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _uiController.editingController,
+                        minLines: 2,
+                        maxLines: 10,
+                        textAlign: TextAlign.center,
+                        enabled: !_uiController.busy,
+                        style: const TextStyle(fontWeight: FontWeight.w700),
+                        decoration: InputDecoration(hintText: 'Paste Token Here'),
+                        textInputAction: TextInputAction.send,
+                        onSubmitted: (_) => _uiController.validate(),
+                        onChanged: (text) => _uiController.ready.value = text.isNotEmpty,
+                      ),
+                    ),
+                    if (Platform.isAndroid || Platform.isIOS)
+                      IconButton(
+                        icon: Icon(RVIcons.qr_code),
+                        onPressed: () {
+                          Get.to(QRCodeScreen());
+                        },
+                      )
+                  ],
+                ),
               ),
               SizedBox(height: 10),
               Obx(
                 () => RaisedButton(
-                  onPressed: _uiController.ready.value
-                      ? () => _uiController.validate()
-                      : null,
+                  onPressed: _uiController.ready.value ? () => _uiController.validate() : null,
                   child: Text('Validate Token'),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -97,8 +114,7 @@ class AuthScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Linkify(
-                text:
-                    'Open Source & Contributors\nhttps://github.com/nemoryoliver/revenuecat-client',
+                text: 'Open Source & Contributors\nhttps://github.com/nemoryoliver/revenuecat-client',
                 style: TextStyle(color: Colors.grey, fontSize: 13),
                 linkStyle: TextStyle(color: Get.theme.accentColor),
                 textAlign: TextAlign.center,
