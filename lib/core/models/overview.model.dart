@@ -16,29 +16,18 @@ class Overview {
   final double revenue;
 
   factory Overview.fromJson(Map<String, dynamic> json) => Overview(
-        activeSubscribersCount: json["active_subscribers_count"] == null
-            ? null
-            : json["active_subscribers_count"].toDouble(),
-        activeTrialsCount: json["active_trials_count"] == null
-            ? null
-            : json["active_trials_count"].toDouble(),
-        activeUsersCount: json["active_users_count"] == null
-            ? null
-            : json["active_users_count"],
-        installsCount: json["installs_count"] == null
-            ? null
-            : json["installs_count"].toDouble(),
+        activeSubscribersCount: json["active_subscribers_count"] == null ? null : json["active_subscribers_count"].toDouble(),
+        activeTrialsCount: json["active_trials_count"] == null ? null : json["active_trials_count"].toDouble(),
+        activeUsersCount: json["active_users_count"] == null ? null : json["active_users_count"].toDouble(),
+        installsCount: json["installs_count"] == null ? null : json["installs_count"].toDouble(),
         mrr: json["mrr"] == null ? null : json["mrr"].toDouble(),
         revenue: json["revenue"] == null ? null : json["revenue"].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
-        "active_subscribers_count":
-            activeSubscribersCount == null ? null : activeSubscribersCount,
-        "active_trials_count":
-            activeTrialsCount == null ? null : activeTrialsCount,
-        "active_users_count":
-            activeUsersCount == null ? null : activeUsersCount,
+        "active_subscribers_count": activeSubscribersCount == null ? null : activeSubscribersCount,
+        "active_trials_count": activeTrialsCount == null ? null : activeTrialsCount,
+        "active_users_count": activeUsersCount == null ? null : activeUsersCount,
         "installs_count": installsCount == null ? null : installsCount,
         "mrr": mrr == null ? null : mrr,
         "revenue": revenue == null ? null : revenue,

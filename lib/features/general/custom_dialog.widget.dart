@@ -30,6 +30,7 @@ class CustomDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       clipBehavior: Clip.hardEdge,
       backgroundColor: Get.isDarkMode ? Colors.grey.shade900 : Colors.white,
+      clipBehavior: Clip.hardEdge,
       titlePadding: EdgeInsets.zero,
       scrollable: true,
       title: Stack(
